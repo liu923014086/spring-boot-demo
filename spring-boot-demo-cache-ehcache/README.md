@@ -294,6 +294,12 @@ public class UserServiceTest extends SpringBootDemoCacheEhcacheApplicationTests 
 }
 ```
 
+## liudaxia 20190822扩展了ehcache在缓存数据变化时的监听
+```java
+1、src\main\java\com\xkcoding\cache\ehcache\cachefactory  CacheEventHandler 为扩展接口，CacheEventHandlerImpl为实现
+2、com/xkcoding/cache/ehcache/cachefactory/RMIAsynchronousCacheReplicatorSelfDefine.java 里用SPI的形式引入了实现。
+   需要修改src\main\resources\META-INF\services下的文件
+```
 ## 参考
 
 - Ehcache 官网：http://www.ehcache.org/documentation/
