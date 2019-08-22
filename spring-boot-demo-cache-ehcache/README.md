@@ -125,6 +125,16 @@ logging:
         updateCheck="false">
     <!--缓存路径，用户目录下的base_ehcache目录-->
     <diskStore path="user.home/base_ehcache"/>
+		
+<!--组播-->
+<cacheManagerPeerProviderFactory
+    class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+    properties="peerDiscovery=manual,
+            rmiUrls=//localhost:40001/user"/>
+  <cacheManagerPeerListenerFactory
+    class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+    properties="hostName=localhost, port=40002,
+        socketTimeoutMillis=2000"/>
 
     <defaultCache
             maxElementsInMemory="20000"
@@ -152,7 +162,19 @@ logging:
            overflowToDisk="true"
            diskPersistent="false"
            timeToLiveSeconds="0"
-           diskExpiryThreadIntervalSeconds="120"/>
+           diskExpiryThreadIntervalSeconds="1200">
+
+      <cacheEventListenerFactory
+        class="com.xkcoding.cache.ehcache.cachefactory.RMICacheReplicatorSelfDefineFactory" properties="replicateAsynchronously=true, replicatePuts=true,
+                            replicatePutsViaCopy=true, replicateUpdates=true,
+                            replicateUpdatesViaCopy=true, replicateRemovals=true,
+                            asynchronousReplicationIntervalMillis=200"/>
+      <bootstrapCacheLoaderFactory
+        class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+        >
+      </bootstrapCacheLoaderFactory>
+
+    </cache>
 
 </ehcache>
 ```
