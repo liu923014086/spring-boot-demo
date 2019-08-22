@@ -10,6 +10,9 @@ import net.sf.ehcache.util.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 扩展本应用的cache变化时候监听到变化的cache，而不是远程推送过来的
+ */
 public class RMICacheReplicatorSelfDefineFactory extends CacheEventListenerFactory {
   protected static final int DEFAULT_ASYNCHRONOUS_REPLICATION_INTERVAL_MILLIS = 1000;
   protected static final int DEFAULT_ASYNCHRONOUS_REPLICATION_MAXIMUM_BATCH_SIZE = 1000;
